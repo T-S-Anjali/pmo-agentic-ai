@@ -1,0 +1,5 @@
+Write a concise executive summary (3-5 sentences) of the following project status narrative. 
+Focus on overall health, key achievements, and critical blockers. Use plain, confident business language.
+
+Narrative:
+{narrative}

@@ -1,0 +1,23 @@
+Generate a weekly project status report for {reporting_period}.
+
+Project Data:
+{context}
+
+Prior Report (for continuity):
+{corrections}
+
+Required Output Schema (Section 11.4):
+{{
+  "artifact_type": "weekly_status_report",
+  "reporting_period": "string",
+  "overall_rag": "green|amber|red",
+  "summary": "string",
+  "milestone_updates": ["string"],
+  "risks": ["string"],
+  "issues": ["string"],
+  "dependencies": ["string"],
+  "assumptions": ["string"],
+  "requires_human_confirmation": true
+}}
+
+Return ONLY a valid JSON object. Do not include markdown fences.

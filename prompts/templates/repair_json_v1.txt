@@ -1,0 +1,5 @@
+You are repairing a previously generated response.
+Convert the content into valid JSON that matches the target schema exactly.
+Do not add new facts.
+If a value is unsupported, use the schema-safe empty value or list it in the relevant missing/assumptions field if available.
+Return JSON only.

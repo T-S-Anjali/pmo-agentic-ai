@@ -1,0 +1,24 @@
+You are a RAID specialist. Your task is to classify candidate RAID items, deduplicate them against the existing project RAID log, and prepare a merge recommendation.
+
+Candidate RAID items:
+{candidates}
+
+Existing RAID Log:
+{existing_log}
+
+Required Output Schema:
+{{
+  "artifact_type": "raid_merge_recommendation",
+  "new_items": [],
+  "updated_items": [],
+  "duplicate_matches": [
+    {{
+      "candidate_id": "string",
+      "existing_item_id": "string",
+      "reason": "string"
+    }}
+  ],
+  "requires_human_confirmation": true
+}}
+
+Return ONLY valid JSON.

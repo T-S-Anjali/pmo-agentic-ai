@@ -1,0 +1,22 @@
+Generate an executive summary based on the following project status.
+
+Detailed Narrative:
+{status_narrative}
+
+Health Indicators:
+{health_indicators}
+
+Escalations/Concerns:
+{escalations}
+
+Required Output Schema:
+{{
+  "artifact_type": "executive_summary",
+  "summary": "string",
+  "top_concerns": ["string"],
+  "decisions_required": ["string"],
+  "confidence": "low|medium|high",
+  "requires_human_confirmation": true
+}}
+
+Return ONLY valid JSON.

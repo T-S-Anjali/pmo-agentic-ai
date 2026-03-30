@@ -1,0 +1,17 @@
+Verify data completeness for the following input.
+
+Required Fields:
+{required_fields}
+
+Input Data:
+{input_data}
+
+Required Output Schema:
+{{
+  "status": "sufficient|insufficient|ambiguous",
+  "missing_fields": ["string"],
+  "ambiguous_fields": ["string"],
+  "recommended_next_action": "continue|request_input|manual_review"
+}}
+
+Return ONLY valid JSON.

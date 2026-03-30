@@ -1,0 +1,23 @@
+Extract all RAID items from the following meeting notes.
+
+Meeting Notes:
+{notes}
+
+Required Output Schema (Section 11.6):
+{{
+  "artifact_type": "raid_candidates",
+  "items": [
+    {{
+      "category": "risk|assumption|issue|dependency|unknown",
+      "title": "string",
+      "description": "string",
+      "evidence": "snip from text",
+      "owner": "string|null",
+      "severity": "low|medium|high|unknown"
+    }}
+  ],
+  "unresolved_items": ["string"],
+  "confidence": "low|medium|high"
+}}
+
+Return ONLY a valid JSON object. Do not include markdown fences.

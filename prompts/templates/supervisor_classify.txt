@@ -1,0 +1,12 @@
+Classify the following project intake data into one of these categories:
+- infrastructure
+- software_development
+- business_transformation
+- regulatory_compliance
+- data_analytics
+- other
+
+Respond with ONLY the category string, nothing else.
+
+Project data:
+{input}

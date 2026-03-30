@@ -1,0 +1,23 @@
+Critique the following {artifact_type} draft.
+
+Content:
+{content}
+
+Quality Rubric:
+{rubric}
+
+Required Output Schema:
+{{
+  "artifact_type": "critique_result",
+  "readiness": "ready|revise",
+  "quality_score": number,
+  "findings": [
+    {{
+      "dimension": "clarity|completeness|consistency|tone|structure",
+      "message": "string",
+      "recommended_revision": "string"
+    }}
+  ]
+}}
+
+Return ONLY valid JSON.

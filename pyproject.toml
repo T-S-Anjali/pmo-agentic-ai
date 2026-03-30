@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "pmo-agentic-ai"
+version = "0.1.0"
+description = "PMO Persona Agentic AI — LangGraph-based multi-agent PMO automation"
+authors = ["NTT DATA"]
+readme = "README.md"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.isort]
+known-first-party = ["app", "agents", "graph_runtime", "retrieval", "rules"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-v --tb=short"

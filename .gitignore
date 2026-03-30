@@ -1,0 +1,61 @@
+# ── Python ───────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+.env
+*.env
+pip-log.txt
+pip-delete-this-directory.txt
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# ── Node / Frontend ───────────────────────────
+node_modules/
+dist/
+.next/
+out/
+*.local
+.npm
+.pnpm-store/
+
+# ── IDE ───────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Docker ────────────────────────────────────
+*.dockerenv
+
+# ── Secrets / Keys ────────────────────────────
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# ── OS ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Generated Artifacts ───────────────────────
+generated_docs/
+chroma_db/
+*.db
+*.sqlite3
