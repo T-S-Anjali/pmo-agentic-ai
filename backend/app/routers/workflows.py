@@ -53,7 +53,7 @@ async def start_workflow(
     )
 
 
-@router.get("/{workflow_id}/status", response_model=WorkflowStatusResponse)
+@router.get("/{workflow_id}", response_model=WorkflowStatusResponse)
 async def get_workflow_status(
     workflow_id: str,
     db: Annotated[AsyncSession, Depends(get_db)],
@@ -92,3 +92,14 @@ async def resume_workflow(
         "status": "resuming",
         "correlation_id": body.correlation_id
     }
+
+
+@router.post("/{workflow_id}/cancel")
+async def cancel_workflow(
+    workflow_id: str,
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Cancel a running workflow."""
+    svc = WorkflowService(db)
+    await svc.cancel_workflow(workflow_id)
+    return {"status": "cancelled", "workflow_id": workflow_id}

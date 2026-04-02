@@ -1,7 +1,19 @@
 """Documents router — upload project and governance documents."""
 from fastapi import APIRouter, File, UploadFile
+from fastapi.responses import FileResponse
+import os
 
 router = APIRouter()
+
+@router.get("/download/{doc_type}/{filename}")
+async def download_document(doc_type: str, filename: str):
+    """Download a document (e.g., charter, governance, etc.) by type and filename."""
+    # Define base directory for documents (customize as needed)
+    base_dir = os.path.join(os.path.dirname(__file__), "..", "..", "..", "documents", doc_type)
+    file_path = os.path.abspath(os.path.join(base_dir, filename))
+    if not os.path.isfile(file_path):
+        return {"error": "File not found."}
+    return FileResponse(file_path, filename=filename, media_type="application/octet-stream")
 
 
 @router.post("/upload/project")

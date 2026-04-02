@@ -57,4 +57,5 @@ class WorkflowStatusResponse(BaseModel):
     approval_status: str | None = None
     current_step: str | None = None
     pending_task_id: str | None = None
+    created_at: Any = None
     updated_at: Any

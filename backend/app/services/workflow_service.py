@@ -120,6 +120,9 @@ class WorkflowService:
                 pass
             await self._update_status(workflow_id, WorkflowStatus.COMPLETED)
         except Exception as exc:
+            import traceback
+            with open("graph_error.log", "w", encoding="utf-8") as f:
+                traceback.print_exc(file=f)
             logger.exception("Workflow execution failed", workflow_id=workflow_id, correlation_id=correlation_id, exc=str(exc))
             await self._update_status(workflow_id, WorkflowStatus.FAILED)
 

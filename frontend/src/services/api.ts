@@ -51,26 +51,26 @@ export interface ApprovalDecision {
 
 export const workflowApi = {
   start: (body: WorkflowStartRequest) =>
-    api.post<WorkflowStartResponse>('/workflows/start', body),
+    api.post<WorkflowStartResponse>('workflows/start', body),
 
   getStatus: (workflowId: string) =>
-    api.get<WorkflowStatus>(`/workflows/${workflowId}`),
+    api.get<WorkflowStatus>(`workflows/${workflowId}`),
 
   resume: (workflowId: string, body: ApprovalDecision) =>
-    api.post(`/workflows/${workflowId}/resume`, body),
+    api.post(`workflows/${workflowId}/resume`, body),
 
   cancel: (workflowId: string) =>
-    api.post(`/workflows/${workflowId}/cancel`),
+    api.post(`workflows/${workflowId}/cancel`),
 }
 
 // ── Approval API ──────────────────────────────────────────────────────
 
 export const approvalApi = {
   listPending: (reviewerId: string) =>
-    api.get('/approvals/pending', { params: { reviewer_id: reviewerId } }),
+    api.get('approvals/pending', { params: { reviewer_id: reviewerId } }),
 
   decide: (approvalId: string, body: ApprovalDecision) =>
-    api.post(`/approvals/${approvalId}/decide`, body),
+    api.post(`approvals/${approvalId}/decide`, body),
 }
 
 // ── Document API ──────────────────────────────────────────────────────
@@ -79,14 +79,14 @@ export const documentApi = {
   uploadProjectDocs: (files: File[]) => {
     const form = new FormData()
     files.forEach((f) => form.append('files', f))
-    return api.post('/documents/upload/project', form, {
+    return api.post('documents/upload/project', form, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   },
   uploadGovernanceDocs: (files: File[]) => {
     const form = new FormData()
     files.forEach((f) => form.append('files', f))
-    return api.post('/documents/upload/governance', form, {
+    return api.post('documents/upload/governance', form, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   },

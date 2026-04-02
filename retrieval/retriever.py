@@ -13,7 +13,8 @@ logger = structlog.get_logger(__name__)
 def _get_chroma_collection(name: str):
     import chromadb
     from app.core.config import settings
-    client = chromadb.HttpClient(host=settings.CHROMA_HOST, port=settings.CHROMA_PORT)
+    # Use PersistentClient for local-only mode without Docker
+    client = chromadb.PersistentClient(path="./chroma_db")
     return client.get_or_create_collection(name)
 
 

@@ -13,12 +13,14 @@ from graph_runtime.state import (
     PMOGraphState,
     RAIDWorkflowState,
     StatusReportWorkflowState,
+    TestingWorkflowState,
 )
 from graph_runtime.nodes import (
     charter as charter_nodes,
     common as common_nodes,
     raid as raid_nodes,
     status_report as status_nodes,
+    testing as testing_nodes,
 )
 from graph_runtime.edges import route_after_validation, route_after_pm_review
 
@@ -142,11 +144,44 @@ def build_raid_graph():
     )
 
 
+# ── Workflow 4 — Functional Test Generation (DeepAgents)
+# ─────────────────────────────────────────────────────────────────────
+def build_testing_graph():
+    g = StateGraph(TestingWorkflowState)
+
+    g.add_node("ingest_request",         common_nodes.ingest_request)
+    g.add_node("ingest_testing_request",  testing_nodes.ingest_testing_request)
+    g.add_node("run_testing_agent",       testing_nodes.run_testing_agent)
+    g.add_node("save_test_results",       testing_nodes.save_test_results)
+    g.add_node("complete_workflow",       common_nodes.complete_workflow)
+    g.add_node("capture_error",           common_nodes.capture_error)
+
+    g.add_edge(START, "ingest_request")
+    g.add_edge("ingest_request", "ingest_testing_request")
+    g.add_edge("ingest_testing_request", "run_testing_agent")
+    g.add_edge("run_testing_agent", "save_test_results")
+
+    g.add_conditional_edges("save_test_results", route_after_validation, {
+        "pass": "complete_workflow",
+        "fail": "capture_error",
+        "error": "capture_error",
+    })
+
+    g.add_edge("complete_workflow", END)
+    g.add_edge("capture_error", END)
+
+    return g.compile(
+        checkpointer=checkpointer,
+        interrupt_before=[],
+    )
+
+
 # ── Graph Registry ────────────────────────────────────────────────────
 GRAPH_REGISTRY = {
-    "project_intake_to_charter": build_charter_graph,
-    "weekly_status_report":      build_status_report_graph,
-    "raid_update":               build_raid_graph,
+    "project_intake_to_charter":  build_charter_graph,
+    "weekly_status_report":       build_status_report_graph,
+    "raid_update":                build_raid_graph,
+    "functional_test_generation": build_testing_graph,
 }
 
 

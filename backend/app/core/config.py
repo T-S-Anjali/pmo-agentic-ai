@@ -8,8 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # model_config = SettingsConfigDict(env_file=".env", extra="ignore")
-    pass
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     # App
     APP_ENV: Literal["development", "staging", "production"] = "development"
@@ -28,9 +27,23 @@ class Settings(BaseSettings):
     AZURE_OPENAI_DEPLOYMENT: str = "gpt-4o"
     AZURE_OPENAI_API_VERSION: str = "2024-02-01"
     OPENAI_API_KEY: str = ""
+    GOOGLE_API_KEY: str = ""
+    GROQ_API_KEY: str = ""
+
     # Ollama
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "llama3.2"
+
+    # Gemini
+    GEMINI_MODEL: str = "gemini-pro"
+
+    # Groq
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    
+    # Hugging Face Transformers + LoRA
+    HF_MODEL_NAME: str = "mistralai/Mistral-7B-Instruct-v0.2"
+    LORA_ADAPTER_PATH: str = ""  # Path to LoRA adapter directory or file
+    USE_LORA: bool = False  # Whether to load LoRA adapter
 
     # LangGraph checkpointer
     LANGGRAPH_CHECKPOINTER: str = "memory"

@@ -122,3 +122,14 @@ class RAIDWorkflowState(PMOGraphState):
     """Extended state for RAID update workflow."""
     # Data now primarily lives in state['extensions']['raid']
     pass
+
+
+class TestingWorkflowState(PMOGraphState):
+    """Extended state for functional test generation workflow (DeepAgents)."""
+    # Data lives in state['extensions']['testing']:
+    #   feature_description: str  — what to generate tests for
+    #   filename: str             — desired pytest output filename
+    #   agent_output: str | None  — full agent response
+    #   saved_path: str | None    — path to saved .py file
+    #   run_result: str | None    — pytest execution output
+    pass

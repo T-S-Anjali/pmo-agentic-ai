@@ -56,6 +56,7 @@ desktop.ini
 
 # ── Generated Artifacts ───────────────────────
 generated_docs/
+generated_tests/
 chroma_db/
 *.db
 *.sqlite3

@@ -15,20 +15,19 @@ logger = structlog.get_logger(__name__)
 router = APIRouter()
 
 
-@router.get("/tasks", response_model=ApprovalListResponse)
+@router.get("/pending", response_model=ApprovalListResponse)
 async def list_approval_tasks(
     assigned_role: str | None = None,
     assigned_user_id: str | None = None,
     db: AsyncSession = Depends(get_db),
 ):
-    """List approval tasks (Section 7.7)."""
+    """List pending approval tasks (Section 7.7)."""
     svc = ApprovalService(db)
-    # Search logic should handle role/user filtering
     items = await svc.list_pending(assigned_user_id or assigned_role)
     return ApprovalListResponse(items=items)
 
 
-@router.get("/tasks/{task_id}", response_model=ApprovalItemResponse)
+@router.get("/{task_id}", response_model=ApprovalItemResponse)
 async def get_approval_task(
     task_id: str,
     db: AsyncSession = Depends(get_db),
@@ -39,7 +38,7 @@ async def get_approval_task(
     return item
 
 
-@router.post("/tasks/{task_id}/decision")
+@router.post("/{task_id}/decide")
 async def submit_approval_decision(
     task_id: str,
     body: ApprovalDecisionRequest,
